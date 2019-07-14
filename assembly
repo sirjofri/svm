@@ -1,3 +1,5 @@
+BINARY
+
 LDI - 0001 0000 - load argument into A
 LDA - 0010 0000 - load address value into A
 LDB - 0011 0000 - load address value into B
@@ -6,10 +8,12 @@ JMP - 0101 0000 - load argument into PC
 OUT - 0110 xxxx - load A into output
 HLT - 1111 xxxx - halt the machine
 
-LDI - 01 0000 - load argument into A
-LDA - 02 0000 - load address value into A
-LDB - 03 0000 - load address value into B
-ADD - 04 0000 - load sum of A+B into A
-JMP - 05 0000 - load argument into PC
-OUT - 06 xxxx - load A into output
-HLT - ff xxxx - halt the machine
+HEXADECIMAL
+
+LDI - 1 0 - load argument into A
+LDA - 2 0 - load address value into A
+LDB - 3 0 - load address value into B
+ADD - 4 0 - load sum of A+B into A
+JMP - 5 0 - load argument into PC
+OUT - 6 x - load A into output
+HLT - f x - halt the machine
