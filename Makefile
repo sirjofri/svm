@@ -7,9 +7,12 @@ svm: svm.c
 
 all: svm examples
 
+clean:
+	git clean -Xf
+
 examples: $(EXAMPLES:%.sh=%)
 
 $(EXAMPLES): %: %.sh
 	./$< > $@
 
-.PHONY: all examples
+.PHONY: all examples clean
