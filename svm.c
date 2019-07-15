@@ -13,6 +13,7 @@
 #define OUT 0x86
 #define JC  0x07
 #define JZ  0x08
+#define STA 0x09
 #define HLT 0xff
 
 #define F_ZERO  0x01
@@ -73,6 +74,9 @@ eval(unsigned char input)
 	case JZ:
 		if (flags & F_ZERO)
 			pc = param;
+		break;
+	case STA:
+		memory[param] = a;
 		break;
 	case HLT:
 		return 0;
