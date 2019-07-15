@@ -5,13 +5,13 @@
 #define MEMORY 1024
 #endif
 
-#define LDI 0x1
-#define LDA 0x2
-#define LDB 0x3
-#define ADD 0x4
-#define JMP 0x5
-#define OUT 0x6
-#define HLT 0xf
+#define LDI 0x01
+#define LDA 0x02
+#define LDB 0x03
+#define ADD 0x84
+#define JMP 0x05
+#define OUT 0x86
+#define HLT 0xff
 
 char *argv0;
 
@@ -23,8 +23,12 @@ unsigned char memory[MEMORY];
 int
 eval(unsigned char input)
 {
-	unsigned char cmd = (input & 0xf0) >> 4;
-	unsigned char param = input & 0x0f;
+	unsigned char param = 0;
+	unsigned char cmd = input;
+	unsigned char loadnext = input & 0x80;
+	if (!loadnext) {
+		param = memory[pc++];
+	}
 
 	switch (cmd) {
 	case LDI:
