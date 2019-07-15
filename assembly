@@ -1,23 +1,19 @@
 STRUCTURE
+---------
 
-first bit low: load next char
+- first bit low: load next char
 
-BINARY
+COMMAND LIST
+------------
 
-LDI - 0000 0001  0000 0000 - load argument into A
-LDA - 0000 0010  0000 0000 - load address value into A
-LDB - 0000 0011  0000 0000 - load address value into B
-ADD - 1000 0100            - load sum of A+B into A
-JMP - 0000 0101  0000 0000 - load argument into PC
-OUT - 1000 0110            - load A into output
-HLT - 1111 1111            - halt the machine
+CMD - BINARY     PARAM     - HX PM - DESC
 
-HEXADECIMAL
-
-LDI - 01 00 - load argument into A
-LDA - 02 00 - load address value into A
-LDB - 03 00 - load address value into B
-ADD - 84    - load sum of A+B into A
-JMP - 05 00 - load argument into PC
-OUT - 86    - load A into output
-HLT - ff    - halt the machine
+LDI - 0000 0001  0000 0000 - 01 00 - load argument into A
+LDA - 0000 0010  0000 0000 - 02 00 - load address value into A
+LDB - 0000 0011  0000 0000 - 03 00 - load address value into B
+ADD - 1000 0100            - 84    - load sum of A+B into A
+JMP - 0000 0101  0000 0000 - 05 00 - load argument into PC
+OUT - 1000 0110            - 86    - load A into output
+JC  - 0000 0111  0000 0000 - 07 00 - jump if carry (load argument into PC if carry flag is set)
+JZ  - 0000 1000  0000 0000 - 08 00 - jump if zero
+HLT - 1111 1111            - ff    - halt the machine

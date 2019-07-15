@@ -11,14 +11,31 @@
 #define ADD 0x84
 #define JMP 0x05
 #define OUT 0x86
+#define JC  0x07
+#define JZ  0x08
 #define HLT 0xff
+
+#define F_ZERO  0x01
+#define F_CARRY 0x02
 
 char *argv0;
 
 unsigned char a, b;
+unsigned char flags;
 unsigned int pc = 0;
 
 unsigned char memory[MEMORY];
+
+unsigned char
+add(unsigned char a, unsigned char b)
+{
+	unsigned char result = a + b;
+	if (result < a && result < b)
+		flags |= F_CARRY;
+	if (result == 0)
+		flags |= F_ZERO;
+	return result;
+}
 
 int
 eval(unsigned char input)
@@ -41,13 +58,21 @@ eval(unsigned char input)
 		b = memory[param];
 		break;
 	case ADD:
-		a = a + b;
+		a = add(a, b);
 		break;
 	case JMP:
 		pc = param;
 		break;
 	case OUT:
-		printf("%d", a);
+		printf("%u", a); // change u to c later
+		break;
+	case JC:
+		if (flags & F_CARRY)
+			pc = param;
+		break;
+	case JZ:
+		if (flags & F_ZERO)
+			pc = param;
 		break;
 	case HLT:
 		return 0;
