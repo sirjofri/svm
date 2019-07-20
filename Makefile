@@ -3,9 +3,13 @@ LDFLAGS=
 
 EXAMPLES=$(basename $(shell ls example/*.sh))
 
+prog: svm disas
+
 svm: svm.c
 
-all: svm examples
+disas: disas.c
+
+all: test
 
 clean:
 	git clean -Xf
@@ -35,4 +39,4 @@ test: svm examples
 $(EXAMPLES): %: %.sh
 	./$< > $@
 
-.PHONY: all examples clean
+.PHONY: all examples clean prog test
