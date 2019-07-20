@@ -5,6 +5,7 @@
 
 #define LDX 0x90
 #define STX 0xa0
+#define LXI 0x30
 
 #define LDI 0x01
 #define LDA 0x02
@@ -58,6 +59,9 @@ eval(unsigned char input)
 		return 1;
 	case STX:
 		rx[input & 0x0f] = a;
+		return 1;
+	case LXI:
+		rx[input & 0x0f] = param;
 		return 1;
 	}
 	cmd = input;

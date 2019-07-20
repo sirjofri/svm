@@ -29,6 +29,8 @@ test: svm examples
 	@test "`./svm <example/exampleprog6`"="4" && echo "passed"
 	@echo -n "testing exampleprog7 ... "
 	@test "`./svm <example/exampleprog7`"="4" && echo "passed"
+	@echo -n "testing exampleprog8 ... "
+	@test "`./svm <example/exampleprog8`"="4" && echo "passed"
 
 $(EXAMPLES): %: %.sh
 	./$< > $@

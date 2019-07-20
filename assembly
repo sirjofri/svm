@@ -19,4 +19,5 @@ JZ  - 0000 1000  0000 0000 - 08 00 - jump if zero
 STA - 0000 1001  0000 0000 - 09 00 - store A into memory address
 LDX - 1001 XXXX            - 9X    - load register X into A
 STX - 1010 XXXX            - aX    - store A into register X
+LXI - 0011 XXXX  0000 0000 - 3X 00 - load argument immediately into register X
 HLT - 1111 1111            - ff    - halt the machine
