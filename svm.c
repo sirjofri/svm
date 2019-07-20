@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#ifndef MEMORY
-#define MEMORY 1024
-#endif
+#define MEMORY 256
+
+#define LDX 0x90
+#define STX 0xa0
 
 #define LDI 0x01
 #define LDA 0x02
@@ -25,6 +26,7 @@ unsigned char a, b;
 unsigned char flags;
 unsigned int pc = 0;
 
+unsigned char rx[16];
 unsigned char memory[MEMORY];
 
 unsigned char
@@ -48,6 +50,19 @@ eval(unsigned char input)
 		param = memory[pc++];
 	}
 
+	/* 4bit param pass */
+	cmd &= 0xf0;
+	switch (cmd) {
+	case LDX:
+		a = rx[input & 0x0f];
+		return 1;
+	case STX:
+		rx[input & 0x0f] = a;
+		return 1;
+	}
+	cmd = input;
+
+	/* 8bit pass */
 	switch (cmd) {
 	case LDI:
 		a = param;
